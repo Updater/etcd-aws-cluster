@@ -88,8 +88,9 @@ for url in $etcd_peer_urls; do
     SLEEP_DURATION=$[ ( $RANDOM % 100 )  + 1 ]
     echo "Going to sleep for $SLEEP_DURATION before curling $url/v2/members"
     sleep $SLEEP_DURATION
+    echo "Curling $url/v2/members.."
 
-    etcd_members=$(curl $ETCD_CURLOPTS --max-time=60 -f -s $url/v2/members)
+    etcd_members=$(curl $ETCD_CURLOPTS --max-time 60 -f -s $url/v2/members)
 
     if [[ $? == 0 && $etcd_members ]]; then
         etcd_good_member_url="$url"
