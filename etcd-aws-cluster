@@ -23,12 +23,6 @@ retry_times=${RETRY_TIMES:-10}
 # Add a sleep time to allow etcd client requets to finish
 wait_time=3
 
-#if the script has already run just exit
-if [ -f "$etcd_peers_file_path" ]; then
-    echo "$pkg: etcd-peers file $etcd_peers_file_path already created, exiting"
-    exit 0
-fi
-
 ec2_instance_id=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 if [[ ! $ec2_instance_id ]]; then
     echo "$pkg: failed to get instance id from instance metadata"
